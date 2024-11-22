@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <!-- Registration Page -->
+    <div class="container" id="registrationPage">
+        <h1>Register</h1>
+        <form id="registrationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter a password" required>
+
+            <label for="payment">Payment Amount (₹500):</label>
+            <input type="number" id="payment" value="500" disabled>
+
+            <button type="button" onclick="registerUser()">Register</button>
+        </form>
+    </div>
+
+    <!-- Account Page -->
+    <div class="container" id="accountPage" style="display:none;">
+        <h1>Welcome, <span id="accountHolder"></span></h1>
+        <h2>Balance: ₹<span id="balance">0</span></h2>
+        <p>Your referral link: <span id="referralLink">[Generate after Registration]</span></p>
+    </div>
+
+    <script>
+        let balance = 0;
+
+        function registerUser() {
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+
+            if (!name || !password) {
+                alert('Please fill all fields!');
+                return;
+            }
+
+            // Mock payment gateway process
+            alert('Payment successful!');
+
+            // Store user details (in real-world apps, use secure server storage)
+            localStorage.setItem('name', name);
+            localStorage.setItem('balance', balance);
+            localStorage.setItem('referralLink', `https://example.com/register?ref=${name}`);
+
+            // Display account page
+            document.getElementById('registrationPage').style.display = 'none';
+            document.getElementById('accountPage').style.display = 'block';
+
+            document.getElementById('accountHolder').innerText = name;
+            document.getElementById('balance').innerText = balance;
+            document.getElementById('referralLink').innerText = `https://example.com/register?ref=${name}`;
+        }
+    </script>
+</body>
+</html>
